@@ -7,7 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "check:all": "yarn format:check && yarn lint:check && yarn tsprune && yarn test:e2e && yarn test",
+    "check:all": "yarn format:check && yarn lint:check && yarn tsprune && yarn test",
+    "cov:open": "open-cli ./coverage/lcov-report/index.html",
     "format": "prettier --write \"**/*.(ts|js)\"",
     "format:check": "prettier --check \"**/*.(ts|js)\"",
     "lint": "eslint --fix --ext .ts,.js ./",
@@ -19,14 +20,20 @@
     "start:prod": "node dist/main",
     "test": "jest",
     "test:cov": "jest --coverage",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:watch": "jest --watch",
     "tsprune": "ts-prune"
   },
   "dependencies": {
+    "@nestjs/apollo": "10.0.4",
     "@nestjs/common": "8.3.1",
     "@nestjs/core": "8.3.1",
+    "@nestjs/graphql": "10.0.4",
     "@nestjs/platform-express": "8.3.1",
+    "apollo-server-express": "3.6.3",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.13.2",
+    "graphql": "16.3.0",
+    "nanoid": "3.3.1",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
     "rxjs": "7.5.4"
@@ -40,12 +47,13 @@
     "@types/jest": "27.4.0",
     "@types/node": "17.0.19",
     "@types/supertest": "2.0.11",
-    "@typescript-eslint/eslint-plugin": "5.12.0",
-    "@typescript-eslint/parser": "5.12.0",
+    "@typescript-eslint/eslint-plugin": "5.12.1",
+    "@typescript-eslint/parser": "5.12.1",
     "eslint": "8.9.0",
     "eslint-config-prettier": "8.4.0",
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.5.1",
+    "open-cli": "7.0.1",
     "prettier": "2.5.1",
     "source-map-support": "0.5.21",
     "supertest": "6.2.2",
@@ -57,20 +65,24 @@
     "typescript": "4.5.5"
   },
   "jest": {
+    "bail": true,
     "moduleFileExtensions": [
       "js",
       "json",
       "ts"
     ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
+    "rootDir": ".",
+    "testRegex": ".(e2e-)?spec.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "src/**/*.ts"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "coverage",
+    "testEnvironment": "node",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ]
   }
 }

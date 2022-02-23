@@ -20,7 +20,8 @@ yarn
 
 ## Running the app
 
-It will start the app on http://localhost:3000
+- It will start the app on http://localhost:3000.
+- A playground is available on http://localhost:3000/graphql to try it out.
 
 ```bash
 # development
@@ -53,13 +54,10 @@ yarn check:all
 ## Test
 
 ```bash
-# unit tests
+# Run tests
 yarn test
 
-# e2e tests
-yarn test:e2e
-
-# test coverage
+# Run tests with coverage
 yarn test:cov
 ```
 
