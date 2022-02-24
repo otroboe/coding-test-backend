@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "id": "user-1",
+      "name": "John",
+      "picture": "https://cataas.com/cat?width=100",
+      "joinedForums": [
+        "forum-1",
+        "forum-2"
+      ]
+    },
+    {
+      "id": "user-2",
+      "name": "Jane",
+      "picture": "https://cataas.com/cat?width=100",
+      "joinedForums": [
+        "forum-1",
+        "forum-2",
+        "forum-3"
+      ]
+    }
+  ],
+  "forums": [
+    {
+      "id": "forum-1",
+      "topic": "Cinema",
+      "createdBy": "user-1"
+    },
+    {
+      "id": "forum-2",
+      "topic": "Music",
+      "createdBy": "user-2"
+    },
+    {
+      "id": "forum-3",
+      "topic": "Sports",
+      "createdBy": "user-2"
+    }
+  ],
+  "messages": [
+    {
+      "content": "I love cinema!",
+      "forum": "forum-1",
+      "createdBy": "user-1"
+    },
+    {
+      "content": "What about TV shows?",
+      "forum": "forum-1",
+      "createdBy": "user-2"
+    },
+    {
+      "content": "It depends which ones",
+      "forum": "forum-1",
+      "createdBy": "user-1"
+    },
+    {
+      "content": "I know what you mean :)",
+      "forum": "forum-1",
+      "createdBy": "user-2"
+    },
+    {
+      "content": "And I love music too",
+      "forum": "forum-2",
+      "createdBy": "user-1"
+    },
+    {
+      "content": "Maybe not as much as cinema...",
+      "forum": "forum-2",
+      "createdBy": "user-1"
+    }
+  ]
+}

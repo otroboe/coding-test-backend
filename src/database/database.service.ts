@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import { Forum } from '../forum/models/forum.model';
 import { Message } from '../message/models/message.model';
 import { User } from '../user/models/user.model';
+import { FixturesService } from './fixtures.service';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit {
@@ -11,18 +12,18 @@ export class DatabaseService implements OnModuleInit {
   private messages: Message[];
   private users: User[];
 
-  constructor() {
+  constructor(private readonly fixtures: FixturesService) {
     this.forums = [];
     this.messages = [];
     this.users = [];
   }
 
-  onModuleInit() {
-    this.loadFixtures();
+  async onModuleInit() {
+    await this.loadFixtures();
   }
 
-  loadFixtures() {
-    console.log('load fixtures!');
+  private async loadFixtures() {
+    await this.fixtures.load();
   }
 
   /**

@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing';
 
 import { AppModule } from '../../src/app.module';
 import { DatabaseModule } from '../../src/database/database.module';
-import { DatabaseService } from '../../src/database/database.service';
+import { FixturesService } from '../../src/database/fixtures.service';
 
 interface TestSuite {
   app: INestApplication;
@@ -18,8 +18,8 @@ export const initTestSuite = async (): Promise<TestSuite> => {
   const app = module.createNestApplication();
 
   // Don't load fixtures when testing
-  const databaseService = app.select(DatabaseModule).get(DatabaseService);
-  jest.spyOn(databaseService, 'loadFixtures').mockImplementation();
+  const fixtures = app.select(DatabaseModule).get(FixturesService);
+  jest.spyOn(fixtures, 'load').mockImplementation();
 
   await app.init();
 
