@@ -105,6 +105,7 @@ describe('Forum Resolver', () => {
 
   describe('mutation - createForum', () => {
     const validPayload: ForumInput = {
+      isPrivate: false,
       topic: 'sports',
     };
 

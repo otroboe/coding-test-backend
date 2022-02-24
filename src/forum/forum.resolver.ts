@@ -35,7 +35,7 @@ export class ForumResolver {
 
   @Query(() => [Forum], { name: 'forums' })
   getAvailableForums(): Forum[] {
-    return this.forumService.find();
+    return this.forumService.find().filter(({ isPrivate }) => !isPrivate);
   }
 
   @Query(() => Forum, { name: 'forum' })

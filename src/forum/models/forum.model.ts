@@ -8,6 +8,9 @@ export class Forum {
   @Field()
   topic: string;
 
+  @Field()
+  isPrivate: boolean;
+
   // user id
   createdBy: string;
 }

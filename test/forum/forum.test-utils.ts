@@ -6,6 +6,7 @@ import { formatResponse, gql } from '../utils/query';
 const forumFields = `
   id
   topic
+  isPrivate
   creator {
     id
     name

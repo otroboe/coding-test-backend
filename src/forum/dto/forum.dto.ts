@@ -6,4 +6,7 @@ export class ForumInput {
   @Field({ description: 'Minimum of 5 characters' })
   @MinLength(5)
   topic: string;
+
+  @Field()
+  isPrivate: boolean;
 }

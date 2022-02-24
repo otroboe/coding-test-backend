@@ -43,6 +43,7 @@ export const createRawForum = (
     createdBy: userId,
     id: databaseService.uniqueId(),
     topic: 'sports',
+    isPrivate: false,
     ...data,
   };
 

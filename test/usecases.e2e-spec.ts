@@ -37,7 +37,7 @@ describe('Usecases - Happy paths!', () => {
     it('Create the forum', async () => {
       query = createForum(app);
 
-      ({ data } = await query(john.id, { topic: 'cinema' }));
+      ({ data } = await query(john.id, { topic: 'cinema', isPrivate: false }));
       johnsForumId = data.id;
 
       expect(data.creator.name).toEqual(john.name);
@@ -71,7 +71,7 @@ describe('Usecases - Happy paths!', () => {
     it('Create the forum', async () => {
       query = createForum(app);
 
-      ({ data } = await query(jane.id, { topic: 'music' }));
+      ({ data } = await query(jane.id, { topic: 'music', isPrivate: false }));
       janesForumId = data.id;
 
       expect(data.creator.name).toEqual(jane.name);
