@@ -25,9 +25,6 @@ yarn
 
 ```bash
 # development
-yarn start
-
-# watch mode
 yarn start:dev
 
 # production mode
@@ -66,3 +63,55 @@ yarn test:cov
 - [NestJS](https://docs.nestjs.com/)
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [ts-prune](https://github.com/nadeesha/ts-prune)
+
+## GQL Schema
+
+```graphql
+scalar DateTime
+
+type Forum {
+  creator: User!
+  id: ID!
+  members: [User!]!
+  messages: [Message!]!
+  topic: String!
+}
+
+input ForumInput {
+  topic: String!
+}
+
+type Message {
+  content: String!
+  createdAt: DateTime!
+  creator: User!
+  id: ID!
+}
+
+input MessageInput {
+  content: String!
+}
+
+type Mutation {
+  createForum(userId: String!, values: ForumInput!): Forum!
+  joinForum(forumId: String!, userId: String!): User!
+  postMessage(
+    forumId: String!
+    userId: String!
+    values: MessageInput!
+  ): Message!
+}
+
+type Query {
+  forum(forumId: String!, userId: String!): Forum!
+  forums: [Forum!]!
+  user(id: String!): User!
+}
+
+type User {
+  forums: [Forum!]!
+  id: ID!
+  name: String!
+  picture: String
+}
+```
