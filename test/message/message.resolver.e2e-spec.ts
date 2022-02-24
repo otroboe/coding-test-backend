@@ -1,7 +1,5 @@
 import { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
 
-import { AppModule } from '../../src/app.module';
 import { MessageInput } from '../../src/message/dto/message.dto';
 import { User } from '../../src/user/models/user.model';
 import {
@@ -14,24 +12,21 @@ import {
   expectNotFoundError,
   expectValidationError,
 } from '../utils/errors';
+import { initTestSuite } from '../utils/tools';
 import { postMessage } from './message.test-utils';
 
 describe('Message Resolver', () => {
   const forumId = 'forum-id!';
   const userId = 'user-id!';
   let app: INestApplication;
+  let close: () => Promise<void>;
   let data: Record<string, any>;
   let query: any;
   let response: Record<string, any>;
   let user: User;
 
   beforeAll(async () => {
-    const module = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = module.createNestApplication();
-    await app.init();
+    ({ app, close } = await initTestSuite());
 
     // Create a default user
     user = createRawUser(app, { id: userId });
@@ -46,8 +41,8 @@ describe('Message Resolver', () => {
     });
   });
 
-  afterAll(() => {
-    app.close();
+  afterAll(async () => {
+    await close();
   });
 
   describe('mutation - postMessage', () => {

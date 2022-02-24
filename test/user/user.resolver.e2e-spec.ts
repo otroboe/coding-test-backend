@@ -1,28 +1,23 @@
 import { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
 
-import { AppModule } from '../../src/app.module';
 import { createRawForum, createRawUser } from '../utils/database';
 import { expectNotFoundError } from '../utils/errors';
+import { initTestSuite } from '../utils/tools';
 import { getOneUser, joinForum } from './user.test-utils';
 
 describe('User Resolver', () => {
   let app: INestApplication;
+  let close: () => Promise<void>;
   let data: Record<string, any>;
   let query: any;
   let response: Record<string, any>;
 
   beforeAll(async () => {
-    const module = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = module.createNestApplication();
-    await app.init();
+    ({ app, close } = await initTestSuite());
   });
 
-  afterAll(() => {
-    app.close();
+  afterAll(async () => {
+    await close();
   });
 
   describe('query - user', () => {

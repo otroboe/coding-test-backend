@@ -21,8 +21,8 @@ export class DatabaseService implements OnModuleInit {
     this.loadFixtures();
   }
 
-  private loadFixtures() {
-    // console.log('load fixtures!');
+  loadFixtures() {
+    console.log('load fixtures!');
   }
 
   /**

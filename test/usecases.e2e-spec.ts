@@ -1,41 +1,36 @@
 import { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
 
-import { AppModule } from '../src/app.module';
 import { User } from '../src/user/models/user.model';
 import { createForum, getOneForum } from './forum/forum.test-utils';
 import { postMessage } from './message/message.test-utils';
 import { getOneUser, joinForum } from './user/user.test-utils';
 import { createRawUser } from './utils/database';
 import { expectForbiddenError } from './utils/errors';
+import { initTestSuite } from './utils/tools';
 
 /**
  * The DB is not reset between tests, and it's on purpose
  */
 describe('Usecases - Happy paths!', () => {
   let app: INestApplication;
+  let close: () => Promise<void>;
   let data: Record<string, any>;
   let jane: User;
   let janesForumId: string;
   let john: User;
   let johnsForumId: string;
-  let response: Record<string, any>;
   let query: any;
+  let response: Record<string, any>;
 
   beforeAll(async () => {
-    const module = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = module.createNestApplication();
-    await app.init();
+    ({ app, close } = await initTestSuite());
 
     john = createRawUser(app, { name: 'John' });
     jane = createRawUser(app, { name: 'Jane' });
   });
 
-  afterAll(() => {
-    app.close();
+  afterAll(async () => {
+    await close();
   });
 
   describe('John create a forum and post some messages inside', () => {
