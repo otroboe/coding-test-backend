@@ -25,6 +25,9 @@ export class UserResolver {
     return this.userService.findById(id);
   }
 
+  /**
+   * @TODO Create a forum JOIN request, instead automatically joining the forum
+   */
   @Mutation(() => User, { name: 'joinForum' })
   joinForum(
     @Args('userId') userId: string,

@@ -57,4 +57,37 @@ export class ForumResolver {
   ): Forum {
     return this.forumService.createOne(userId, input);
   }
+
+  /**
+   * @todo
+   *  - Authorize only if userId is the admin of the forum
+   *  - Update the status of request to APPROVED
+   *  - Add the forum to the creator of the request (inside its joinedForums property)
+   */
+  @Mutation(() => Boolean, { name: 'approveForumRequest' })
+  approveRequest(
+    @Args('userId') userId: string,
+    @Args('requestId') requestId: string,
+  ): boolean {
+    // Prevent eslint warnings
+    console.log({ userId, requestId });
+
+    return true;
+  }
+
+  /**
+   * @todo
+   *  - Authorize only if userId is the admin of the forum
+   *  - Update the status of request to REJECTED
+   */
+  @Mutation(() => Boolean, { name: 'rejectForumRequest' })
+  rejectRequest(
+    @Args('userId') userId: string,
+    @Args('requestId') requestId: string,
+  ): boolean {
+    // Prevent eslint warnings
+    console.log({ userId, requestId });
+
+    return true;
+  }
 }

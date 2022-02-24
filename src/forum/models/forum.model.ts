@@ -1,5 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
+import { ForumRequest } from './request.model';
+
 @ObjectType()
 export class Forum {
   @Field(() => ID)
@@ -13,4 +15,7 @@ export class Forum {
 
   // user id
   createdBy: string;
+
+  @Field(() => [ForumRequest], { nullable: true })
+  requests?: ForumRequest[];
 }
